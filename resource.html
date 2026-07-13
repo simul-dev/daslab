@@ -1,10 +1,20 @@
 <!DOCTYPE HTML>
-<html lang="ko">
+<html lang="ko" data-lang="ko">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<title>DAS Lab — Resources</title>
 	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<script>
+	(function () {
+		try {
+			var params = new URLSearchParams(location.search);
+			var lang = params.get('lang') || localStorage.getItem('daslab-lang') || 'ko';
+			if (lang !== 'en') lang = 'ko';
+			document.documentElement.setAttribute('data-lang', lang);
+		} catch (e) {}
+	})();
+	</script>
 	<style>
 		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,6 +34,9 @@
 		}
 
 		html { scroll-behavior: smooth; }
+
+		html[data-lang="ko"] [lang="en"] { display: none !important; }
+		html[data-lang="en"] [lang="ko"] { display: none !important; }
 
 		body {
 			background: var(--bg);
@@ -477,16 +490,16 @@
 			<span class="nav-logo-sub">Digital Twin · AI · Simulation</span>
 		</a>
 		<ul class="nav-links">
-			<li><a href="index.html#services">서비스</a></li>
-			<li><a href="index.html#clients">클라이언트</a></li>
-			<li><a href="index.html#about">소개</a></li>
-			<li><a href="resource.html">자료실</a></li>
+			<li><a href="index.html#services" lang="ko">서비스</a><a href="index.html#services" lang="en">Services</a></li>
+			<li><a href="index.html#clients" lang="ko">클라이언트</a><a href="index.html#clients" lang="en">Clients</a></li>
+			<li><a href="index.html#about" lang="ko">소개</a><a href="index.html#about" lang="en">About</a></li>
+			<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
 		</ul>
 		<div class="nav-actions">
 			<div class="nav-lang" aria-label="Language switch">
-				<a class="is-active" href="resource.html" aria-current="page">KR</a>
+				<a href="#" data-lang-btn="ko">KR</a>
 				<span class="nav-lang-sep">|</span>
-				<a href="resource_en.html">EN</a>
+				<a href="#" data-lang-btn="en">EN</a>
 			</div>
 			<a href="index.html#contact" class="nav-cta">Contact</a>
 		</div>
@@ -496,16 +509,22 @@
 	<div id="hero">
 		<div class="hero-glow"></div>
 		<div class="hero-inner">
-			<p class="hero-tag">AnyLogic 학습 · 도서 · 무료 리소스</p>
+			<p class="hero-tag" lang="ko">AnyLogic 학습 · 도서 · 무료 리소스</p>
+			<p class="hero-tag" lang="en">AnyLogic Learning · Books · Free Resources</p>
 			<h1 class="hero-title">
 				Simulation Mastery <span class="accent">Starts Here.</span>
 			</h1>
-			<p class="hero-desc">
+			<p class="hero-desc" lang="ko">
 				AnyLogic와 시뮬레이션 모델링을 시작하고 깊게 공부할 수 있는 실무형 스타터 패키지입니다. 지금 바로 활용 가능한 자료, 추천 도서, 무료 리소스를 모아두었습니다.
 			</p>
+			<p class="hero-desc" lang="en">
+				A practical starter pack for learning AnyLogic and simulation modeling — curated materials, recommended books, and free resources you can use immediately.
+			</p>
 			<div class="hero-actions">
-				<a href="#services" class="btn-primary">학습 리소스 보기</a>
-				<a href="#about" class="btn-outline">무료 리소스 둘러보기</a>
+				<a href="#services" class="btn-primary" lang="ko">학습 리소스 보기</a>
+				<a href="#services" class="btn-primary" lang="en">Start Learning</a>
+				<a href="#about" class="btn-outline" lang="ko">무료 리소스 둘러보기</a>
+				<a href="#about" class="btn-outline" lang="en">Free Resources</a>
 			</div>
 		</div>
 	</div>
@@ -514,32 +533,42 @@
 	<section id="services">
 		<div class="section-inner">
 			<p class="section-label">// AnyLogic</p>
-			<h2 class="section-title">학습 자료</h2>
-			<p class="section-desc">기초 개념부터 실무 모델링 패턴까지, 시뮬레이션/AnyLogic 학습을 시작하고 확장해 나가기 좋은 출발점들입니다.</p>
+			<h2 class="section-title" lang="ko">학습 자료</h2>
+			<h2 class="section-title" lang="en">Learning Materials</h2>
+			<p class="section-desc" lang="ko">기초 개념부터 실무 모델링 패턴까지, 시뮬레이션/AnyLogic 학습을 시작하고 확장해 나가기 좋은 출발점들입니다.</p>
+			<p class="section-desc" lang="en">From fundamentals to applied modeling patterns — best places to start and keep improving.</p>
 
 			<div class="cards-3">
 				<div class="card">
-					<span class="card-kicker">01 / 공식 문서</span>
+					<span class="card-kicker" lang="ko">01 / 공식 문서</span>
+					<span class="card-kicker" lang="en">01 / Official</span>
 					<h3 class="card-title">AnyLogic Tutorial</h3>
-					<p class="card-desc">모델링 블록, 라이브러리, 내장 개념에 대한 공식 레퍼런스입니다. 모델을 만들면서 "정확히 어떻게 동작하는지"를 확인할 때 가장 먼저 참고할 수 있는 자료입니다.</p>
+					<p class="card-desc" lang="ko">모델링 블록, 라이브러리, 내장 개념에 대한 공식 레퍼런스입니다. 모델을 만들면서 "정확히 어떻게 동작하는지"를 확인할 때 가장 먼저 참고할 수 있는 자료입니다.</p>
+					<p class="card-desc" lang="en">Core reference for modeling blocks, libraries, and built-in concepts. Use it to confirm "how it works" while building models.</p>
 					<div class="card-actions">
 						<a class="primary" href="https://anylogic.help/tutorials/index.html" target="_blank" rel="noopener noreferrer">Open Tutorials</a>
 					</div>
 				</div>
 
 				<div class="card">
-					<span class="card-kicker">02 / 입문</span>
-					<h3 class="card-title">무료 학습 교재</h3>
-					<p class="card-desc">시뮬레이션 개념을 예제를 통해 이해할 수 있는 초보자 친화적인 자료입니다. 기초 이론을 익히고 첫 모델을 만들어보기 좋습니다.</p>
+					<span class="card-kicker" lang="ko">02 / 입문</span>
+					<span class="card-kicker" lang="en">02 / Getting Started</span>
+					<h3 class="card-title" lang="ko">무료 학습 교재</h3>
+					<h3 class="card-title" lang="en">Free Learning Materials</h3>
+					<p class="card-desc" lang="ko">시뮬레이션 개념을 예제를 통해 이해할 수 있는 초보자 친화적인 자료입니다. 기초 이론을 익히고 첫 모델을 만들어보기 좋습니다.</p>
+					<p class="card-desc" lang="en">Beginner-friendly explanation of simulation concepts with examples. Great for learning the basics and building your first model.</p>
 					<div class="card-actions">
 						<a class="primary" href="https://www.anylogic.kr/resources/books/free-simulation-book-and-modeling-tutorials/" target="_blank" rel="noopener noreferrer">Get Free Book</a>
 					</div>
 				</div>
 
 				<div class="card">
-					<span class="card-kicker">03 / 심화</span>
-					<h3 class="card-title">커스텀 UI 기반 시뮬레이션 실험 환경 구축</h3>
-					<p class="card-desc">AnyLogic Private Cloud를 활용하면 별도 설치 없이 브라우저에서 바로 실행되는 시뮬레이션 실험 환경을 구축할 수 있습니다. 파라미터 조작, 실험 실행, 결과 시각화까지 하나의 인터페이스로 통합 — 현장 담당자가 모델을 직접 다룰 수 있는 환경을 만드는 데 유효합니다.</p>
+					<span class="card-kicker" lang="ko">03 / 심화</span>
+					<span class="card-kicker" lang="en">03 / Advanced</span>
+					<h3 class="card-title" lang="ko">커스텀 UI 기반 시뮬레이션 실험 환경 구축</h3>
+					<h3 class="card-title" lang="en">Building a Custom UI-Based Simulation Experiment Environment</h3>
+					<p class="card-desc" lang="ko">AnyLogic Private Cloud를 활용하면 별도 설치 없이 브라우저에서 바로 실행되는 시뮬레이션 실험 환경을 구축할 수 있습니다. 파라미터 조작, 실험 실행, 결과 시각화까지 하나의 인터페이스로 통합 — 현장 담당자가 모델을 직접 다룰 수 있는 환경을 만드는 데 유효합니다.</p>
+					<p class="card-desc" lang="en">AnyLogic Private Cloud lets you deploy browser-based simulation experiment environments with no installation required. Parameter control, experiment execution, and result visualization — all in one interface, enabling field teams to run models directly.</p>
 					<div class="card-actions">
 						<a class="primary" href="https://cloud.anylogic.com/custom-ui-demo/index.html" target="_blank" rel="noopener noreferrer">View Demo</a>
 						<a href="https://open.kakao.com/me/daslab" target="_blank" rel="noopener noreferrer">Ask DAS Lab</a>
@@ -553,25 +582,33 @@
 	<section id="clients">
 		<div class="section-inner">
 			<p class="section-label">// Books</p>
-			<h2 class="section-title">추천 도서</h2>
-			<p class="section-desc">단순히 도구 사용법을 넘어서, 모델링 사고방식·실험 설계·신뢰할 수 있는 결과 해석을 돕는 책들을 모았습니다.</p>
+			<h2 class="section-title" lang="ko">추천 도서</h2>
+			<h2 class="section-title" lang="en">Recommended Textbooks</h2>
+			<p class="section-desc" lang="ko">단순히 도구 사용법을 넘어서, 모델링 사고방식·실험 설계·신뢰할 수 있는 결과 해석을 돕는 책들을 모았습니다.</p>
+			<p class="section-desc" lang="en">Books that help you go beyond "tool usage" — modeling rigor, experimentation, and trustworthy results.</p>
 
 			<div class="cards-2">
 				<div class="card">
-					<span class="card-kicker">01 / 기본기</span>
-					<h3 class="card-title">시뮬레이션 모델링 기초</h3>
-					<p class="card-desc">엔티티, 이벤트, 대기열, 자원, 변동성 등 핵심 개념을 체계적으로 다룹니다. 결과를 과신하지 않고 해석하는 법을 익히는 데 도움이 됩니다.</p>
+					<span class="card-kicker" lang="ko">01 / 기본기</span>
+					<span class="card-kicker" lang="en">01 / Fundamentals</span>
+					<h3 class="card-title" lang="ko">시뮬레이션 모델링 기초</h3>
+					<h3 class="card-title" lang="en">Simulation Modeling Basics</h3>
+					<p class="card-desc" lang="ko">엔티티, 이벤트, 대기열, 자원, 변동성 등 핵심 개념을 체계적으로 다룹니다. 결과를 과신하지 않고 해석하는 법을 익히는 데 도움이 됩니다.</p>
+					<p class="card-desc" lang="en">Learn the core vocabulary: entities, events, queues, resources, variability, and how to interpret results without overconfidence.</p>
 					<div class="card-actions">
 						<a href="https://www.anylogic.kr/resources/books/free-simulation-book-and-modeling-tutorials/" target="_blank" rel="noopener noreferrer">Free Starter Book</a>
 					</div>
 				</div>
 
 				<div class="card">
-					<span class="card-kicker">02 / 실험</span>
-					<h3 class="card-title">분석 & 검증</h3>
-					<p class="card-desc">검증/검정(verification & validation), 시나리오 설계, 민감도 분석, KPI 관리에 초점을 맞춰 "의사결정에 쓸 수 있는 모델"로 만드는 과정을 다룹니다.</p>
+					<span class="card-kicker" lang="ko">02 / 실험</span>
+					<span class="card-kicker" lang="en">02 / Experimentation</span>
+					<h3 class="card-title" lang="ko">분석 & 검증</h3>
+					<h3 class="card-title" lang="en">Analysis & Validation</h3>
+					<p class="card-desc" lang="ko">검증/검정(verification & validation), 시나리오 설계, 민감도 분석, KPI 관리에 초점을 맞춰 "의사결정에 쓸 수 있는 모델"로 만드는 과정을 다룹니다.</p>
+					<p class="card-desc" lang="en">Focus on verification/validation, scenario design, sensitivity checks, and KPI governance so your model becomes decision-grade.</p>
 					<div class="card-actions">
-						<a href="/cdn-cgi/l/email-protection#05607062606b6031373436456b647360772b666a68" target="_blank" rel="noopener noreferrer">Get Recommendations</a>
+						<a href="mailto:eugene4213@naver.com">Get Recommendations</a>
 					</div>
 				</div>
 			</div>
@@ -583,14 +620,18 @@
 	<section id="about">
 		<div class="section-inner">
 			<p class="section-label">// Free</p>
-			<h2 class="section-title">무료 리소스</h2>
-			<p class="section-desc">오늘 바로 활용할 수 있는 예제 모델, 라이브러리, 커뮤니티 지식, 학습 자료 링크를 모았습니다.</p>
+			<h2 class="section-title" lang="ko">무료 리소스</h2>
+			<h2 class="section-title" lang="en">Free Resources</h2>
+			<p class="section-desc" lang="ko">오늘 바로 활용할 수 있는 예제 모델, 라이브러리, 커뮤니티 지식, 학습 자료 링크를 모았습니다.</p>
+			<p class="section-desc" lang="en">Quick links you can use today: models, libraries, community knowledge, and learning materials.</p>
 
 			<div class="cards-2">
 				<div class="card">
 					<span class="card-kicker">01 / Models</span>
-					<h3 class="card-title">예제 모델 라이브러리</h3>
-					<p class="card-desc">바로 실행할 수 있는 예제 모델들을 보면서 구조 설계, 애니메이션, 데이터 수집 방식을 함께 살펴볼 수 있습니다.</p>
+					<h3 class="card-title" lang="ko">예제 모델 라이브러리</h3>
+					<h3 class="card-title" lang="en">Example Model Library</h3>
+					<p class="card-desc" lang="ko">바로 실행할 수 있는 예제 모델들을 보면서 구조 설계, 애니메이션, 데이터 수집 방식을 함께 살펴볼 수 있습니다.</p>
+					<p class="card-desc" lang="en">Browse ready-to-run examples to learn modeling structure, animation, and data collection.</p>
 					<div class="card-actions">
 						<a class="primary" href="https://cloud.anylogic.com/models" target="_blank" rel="noopener noreferrer">Browse Models</a>
 					</div>
@@ -599,7 +640,8 @@
 				<div class="card">
 					<span class="card-kicker">02 / Community</span>
 					<h3 class="card-title">AnyLogic Community</h3>
-					<p class="card-desc">전 세계 사용자들이 올린 질문, 트러블슈팅, 구현 팁을 볼 수 있는 포럼입니다. 막혔을 때나 특수한 케이스를 다룰 때 특히 유용합니다.</p>
+					<p class="card-desc" lang="ko">전 세계 사용자들이 올린 질문, 트러블슈팅, 구현 팁을 볼 수 있는 포럼입니다. 막혔을 때나 특수한 케이스를 다룰 때 특히 유용합니다.</p>
+					<p class="card-desc" lang="en">Questions, troubleshooting, and implementation tips from other builders. Great for unblock and edge cases.</p>
 					<div class="card-actions">
 						<a class="primary" href="https://www.anylogic.com/forum/" target="_blank" rel="noopener noreferrer">Open Forum</a>
 					</div>
@@ -610,14 +652,19 @@
 			<div style="margin-top: 1px; border: 1px solid var(--border);">
 				<div class="card" style="background: var(--bg2);">
 					<span class="card-kicker">03 / DAS Lab Demo</span>
-					<h3 class="card-title">이차전지 전극 제조공정 시뮬레이션</h3>
-					<p class="card-desc">
+					<h3 class="card-title" lang="ko">이차전지 전극 제조공정 시뮬레이션</h3>
+					<h3 class="card-title" lang="en">Secondary Battery Electrode Manufacturing Process Simulation</h3>
+					<p class="card-desc" lang="ko">
 						AnyLogic 공개 모델(Chocolate Production)을 기반으로, 이차전지 전극 제조공정의 흐름과 자원 운영 로직에 맞게 커스터마이징한 데모 모델입니다. 아래 임베드된 모델을 브라우저에서 직접 실행해볼 수 있습니다.<br><br>
 						공정 시뮬레이션 모델 구축 방법, 적용 범위, 도입 타당성 검토에 관한 <strong style="color: var(--cyan);">교육 및 컨설팅 문의</strong>는 DAS Lab으로 연락주세요.
 					</p>
+					<p class="card-desc" lang="en">
+						A customized demo model based on AnyLogic's open-source Chocolate Production example, adapted to reflect the material flow and resource logic of a secondary battery electrode manufacturing process. You can run the model live in your browser using the embed below.<br><br>
+						For inquiries on <strong style="color: var(--cyan);">simulation modeling education or consulting</strong> — including applicability assessment, scope definition, and model development — contact DAS Lab.
+					</p>
 					<div class="card-actions">
-						<a class="primary" href="https://open.kakao.com/me/daslab" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>
-						<a href="mailto:contact@daslab.co.kr">이메일 문의</a>
+						<a class="primary" href="https://open.kakao.com/me/daslab" target="_blank" rel="noopener noreferrer"><span lang="ko">카카오톡 문의</span><span lang="en">KakaoTalk</span></a>
+						<a href="mailto:eugene4213@naver.com"><span lang="ko">이메일 문의</span><span lang="en">Email Us</span></a>
 					</div>
 				</div>
 			</div>
@@ -634,8 +681,11 @@
 						style="display: block; border: none;">
 					</iframe>
 				</div>
-				<p style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.75rem; letter-spacing: 0.05em;">
+				<p style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.75rem; letter-spacing: 0.05em;" lang="ko">
 					* 본 데모는 AnyLogic Cloud 서버에서 실행됩니다. AnyLogic Company의 오픈소스 모델(Chocolate Production)을 기반으로 DAS Lab이 수정·배포하였습니다.
+				</p>
+				<p style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.75rem; letter-spacing: 0.05em;" lang="en">
+					* This demo runs on AnyLogic Cloud servers. Based on the open-source Chocolate Production model by AnyLogic Company, modified and distributed by DAS Lab.
 				</p>
 			</div>
 
@@ -647,11 +697,36 @@
 		<div class="footer-inner">
 			<span class="footer-copy">© 2026 DAS Lab. Digital Twin · AI · Simulation — Seoul, Korea</span>
 			<ul class="footer-links">
-				<li><a href="index.html#about">소개</a></li>
-				<li><a href="resource.html">자료실</a></li>
+				<li><a href="index.html#about" lang="ko">소개</a><a href="index.html#about" lang="en">About</a></li>
+				<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
 			</ul>
 		</div>
 	</footer>
+
+	<script>
+	(function () {
+		var LANG_KEY = 'daslab-lang';
+
+		function applyLang(lang) {
+			document.documentElement.setAttribute('data-lang', lang);
+			document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (a) {
+				var active = a.getAttribute('data-lang-btn') === lang;
+				a.classList.toggle('is-active', active);
+				if (active) { a.setAttribute('aria-current', 'page'); } else { a.removeAttribute('aria-current'); }
+			});
+			try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+		}
+
+		document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (a) {
+			a.addEventListener('click', function (e) {
+				e.preventDefault();
+				applyLang(a.getAttribute('data-lang-btn'));
+			});
+		});
+
+		applyLang(document.documentElement.getAttribute('data-lang') || 'ko');
+	})();
+	</script>
 
 </body>
 </html>

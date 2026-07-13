@@ -17,6 +17,10 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── I18N TOGGLE ── */
+html[data-lang="ko"] [lang="en"] { display: none !important; }
+html[data-lang="en"] [lang="ko"] { display: none !important; }
+
 body {
 	background: var(--bg);
 	color: var(--text);
