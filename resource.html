@@ -1,0 +1,657 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<title>DAS Lab — Resources</title>
+	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+		:root {
+			--bg:        #050810;
+			--bg2:       #080d1a;
+			--surface:   #0d1525;
+			--border:    rgba(0, 200, 255, 0.12);
+			--cyan:      #00c8ff;
+			--cyan-dim:  rgba(0, 200, 255, 0.18);
+			--cyan-glow: rgba(0, 200, 255, 0.06);
+			--green:     #00ff9d;
+			--text:      #c8d8e8;
+			--text-dim:  #5a7080;
+			--mono:      'Share Tech Mono', monospace;
+			--sans:      'Syne', sans-serif;
+		}
+
+		html { scroll-behavior: smooth; }
+
+		body {
+			background: var(--bg);
+			color: var(--text);
+			font-family: var(--sans);
+			font-size: 15px;
+			line-height: 1.7;
+			overflow-x: hidden;
+		}
+
+		body::before {
+			content: '';
+			position: fixed;
+			inset: 0;
+			background-image:
+				linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+			background-size: 48px 48px;
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		nav {
+			position: fixed;
+			top: 0; left: 0; right: 0;
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 3rem;
+			height: 64px;
+			background: rgba(5, 8, 16, 0.85);
+			backdrop-filter: blur(12px);
+			border-bottom: 1px solid var(--border);
+		}
+
+		.nav-logo {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			text-decoration: none;
+		}
+
+		.nav-logo-img {
+			height: 30px;
+			width: auto;
+		}
+
+		.nav-logo-sub {
+			font-family: var(--mono);
+			font-size: 0.65rem;
+			color: var(--text-dim);
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 2.5rem;
+			list-style: none;
+		}
+
+		.nav-links a {
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--text-dim);
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		.nav-links a:hover { color: var(--cyan); }
+
+		.nav-actions {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+		}
+
+		.nav-lang {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.nav-lang a {
+			color: var(--text-dim);
+			text-decoration: none;
+			transition: color 0.2s, background 0.2s, border-color 0.2s;
+			border: 1px solid transparent;
+			padding: 6px 10px;
+		}
+
+		.nav-lang a:hover { color: var(--cyan); }
+
+		.nav-lang a.is-active {
+			color: var(--bg);
+			background: var(--cyan);
+			border-color: var(--cyan);
+		}
+
+		.nav-lang-sep {
+			color: var(--text-dim);
+			opacity: 0.6;
+			user-select: none;
+		}
+
+		.nav-cta {
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			color: var(--cyan);
+			border: 1px solid var(--cyan);
+			padding: 8px 18px;
+			text-decoration: none;
+			transition: background 0.2s, color 0.2s;
+		}
+
+		.nav-cta:hover {
+			background: var(--cyan);
+			color: var(--bg);
+		}
+
+		#hero {
+			position: relative;
+			min-height: 72vh;
+			display: flex;
+			align-items: center;
+			padding: 120px 3rem 80px;
+			z-index: 1;
+			overflow: hidden;
+		}
+
+		.hero-glow {
+			position: absolute;
+			top: 20%;
+			right: -10%;
+			width: 600px;
+			height: 600px;
+			background: radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%);
+			pointer-events: none;
+		}
+
+		.hero-inner {
+			max-width: 1200px;
+			margin: 0 auto;
+			width: 100%;
+		}
+
+		.hero-tag {
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			color: var(--cyan);
+			margin-bottom: 1.5rem;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.hero-tag::before {
+			content: '';
+			display: inline-block;
+			width: 32px;
+			height: 1px;
+			background: var(--cyan);
+		}
+
+		.hero-title {
+			font-family: var(--sans);
+			font-weight: 800;
+			font-size: clamp(2.2rem, 5vw, 4.4rem);
+			line-height: 1.05;
+			letter-spacing: -0.03em;
+			color: #fff;
+			margin-bottom: 1.2rem;
+		}
+
+		.hero-title .accent { color: var(--cyan); }
+
+		.hero-desc {
+			font-size: 1.05rem;
+			color: var(--text-dim);
+			max-width: 720px;
+			margin-bottom: 2.2rem;
+			line-height: 1.8;
+		}
+
+		.hero-actions {
+			display: flex;
+			gap: 1rem;
+			flex-wrap: wrap;
+		}
+
+		.btn-primary {
+			font-family: var(--mono);
+			font-size: 0.78rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			background: var(--cyan);
+			color: var(--bg);
+			padding: 14px 28px;
+			text-decoration: none;
+			font-weight: 700;
+			transition: opacity 0.2s, transform 0.2s;
+		}
+
+		.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+		.btn-outline {
+			font-family: var(--mono);
+			font-size: 0.78rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			border: 1px solid var(--border);
+			color: var(--text);
+			padding: 14px 28px;
+			text-decoration: none;
+			transition: border-color 0.2s, color 0.2s;
+		}
+
+		.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+		section {
+			position: relative;
+			z-index: 1;
+			padding: 100px 3rem;
+		}
+
+		.section-inner {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.section-label {
+			font-family: var(--mono);
+			font-size: 0.68rem;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			color: var(--cyan);
+			margin-bottom: 1rem;
+		}
+
+		.section-title {
+			font-family: var(--sans);
+			font-weight: 700;
+			font-size: clamp(1.8rem, 3vw, 2.6rem);
+			color: #fff;
+			margin-bottom: 1rem;
+			letter-spacing: -0.02em;
+		}
+
+		.section-desc {
+			color: var(--text-dim);
+			max-width: 720px;
+			margin-bottom: 3rem;
+		}
+
+		#services { background: var(--bg2); }
+		#about { background: var(--bg2); }
+
+		.cards-3 {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1px;
+			background: var(--border);
+			border: 1px solid var(--border);
+		}
+
+		.cards-2 {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1px;
+			background: var(--border);
+			border: 1px solid var(--border);
+		}
+
+		.card {
+			background: var(--bg2);
+			padding: 2.5rem;
+			transition: background 0.3s;
+			position: relative;
+			overflow: hidden;
+		}
+
+		#clients .card { background: var(--bg); }
+		#clients .card:hover { background: var(--surface); }
+
+		.card::before {
+			content: '';
+			position: absolute;
+			top: 0; left: 0; right: 0;
+			height: 2px;
+			background: var(--cyan);
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.3s;
+		}
+
+		.card:hover { background: var(--surface); }
+		.card:hover::before { transform: scaleX(1); }
+
+		.card-kicker {
+			font-family: var(--mono);
+			font-size: 0.65rem;
+			letter-spacing: 0.2em;
+			color: var(--cyan);
+			margin-bottom: 1.2rem;
+			display: block;
+			text-transform: uppercase;
+		}
+
+		.card-title {
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: #fff;
+			margin-bottom: 0.75rem;
+		}
+
+		.card-desc {
+			font-size: 0.88rem;
+			color: var(--text-dim);
+			line-height: 1.7;
+			margin-bottom: 1.25rem;
+		}
+
+		.card-actions {
+			display: flex;
+			gap: 0.75rem;
+			flex-wrap: wrap;
+		}
+
+		.card-actions a {
+			font-family: var(--mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			text-decoration: none;
+			border: 1px solid var(--border);
+			color: var(--text);
+			padding: 10px 14px;
+			transition: border-color 0.2s, color 0.2s, background 0.2s;
+		}
+
+		.card-actions a:hover {
+			border-color: var(--cyan);
+			color: var(--cyan);
+			background: rgba(0, 200, 255, 0.03);
+		}
+
+		.card-actions a.primary {
+			border-color: var(--cyan);
+			color: var(--bg);
+			background: var(--cyan);
+		}
+
+		.card-actions a.primary:hover { opacity: 0.9; color: var(--bg); }
+
+		footer {
+			position: relative;
+			z-index: 1;
+			background: var(--surface);
+			border-top: 1px solid var(--border);
+			padding: 2rem 3rem;
+		}
+
+		.footer-inner {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 1rem;
+		}
+
+		.footer-copy {
+			font-family: var(--mono);
+			font-size: 0.68rem;
+			letter-spacing: 0.1em;
+			color: var(--text-dim);
+		}
+
+		.footer-links {
+			display: flex;
+			gap: 1.5rem;
+			list-style: none;
+		}
+
+		.footer-links a {
+			font-family: var(--mono);
+			font-size: 0.68rem;
+			letter-spacing: 0.1em;
+			color: var(--text-dim);
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		.footer-links a:hover { color: var(--cyan); }
+
+		body::after {
+			content: '';
+			position: fixed;
+			inset: 0;
+			background: repeating-linear-gradient(
+				0deg,
+				transparent,
+				transparent 2px,
+				rgba(0,0,0,0.03) 2px,
+				rgba(0,0,0,0.03) 4px
+			);
+			pointer-events: none;
+			z-index: 999;
+		}
+
+		@keyframes fadeUp {
+			from { opacity: 0; transform: translateY(24px); }
+			to   { opacity: 1; transform: translateY(0); }
+		}
+
+		.hero-tag   { animation: fadeUp 0.6s ease both; }
+		.hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+		.hero-desc  { animation: fadeUp 0.6s 0.2s ease both; }
+		.hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+
+		@media (max-width: 900px) {
+			nav { padding: 0 1.5rem; }
+			.nav-links { display: none; }
+			.nav-lang-sep { display: none; }
+			.nav-lang { gap: 6px; }
+			section { padding: 70px 1.5rem; }
+			#hero { padding: 100px 1.5rem 60px; min-height: 70vh; }
+			.cards-3 { grid-template-columns: 1fr; }
+			.cards-2 { grid-template-columns: 1fr; }
+		}
+	</style>
+</head>
+<body>
+
+	<!-- NAV (aligned with index.html) -->
+	<nav>
+		<a href="index.html" class="nav-logo">
+			<img class="nav-logo-img" src="static/logo/daslab_logo_dark_simple.svg" alt="DAS Lab" />
+			<span class="nav-logo-sub">Digital Twin · AI · Simulation</span>
+		</a>
+		<ul class="nav-links">
+			<li><a href="index.html#services">서비스</a></li>
+			<li><a href="index.html#clients">클라이언트</a></li>
+			<li><a href="index.html#about">소개</a></li>
+			<li><a href="resource.html">자료실</a></li>
+		</ul>
+		<div class="nav-actions">
+			<div class="nav-lang" aria-label="Language switch">
+				<a class="is-active" href="resource.html" aria-current="page">KR</a>
+				<span class="nav-lang-sep">|</span>
+				<a href="resource_en.html">EN</a>
+			</div>
+			<a href="index.html#contact" class="nav-cta">Contact</a>
+		</div>
+	</nav>
+
+	<!-- HERO -->
+	<div id="hero">
+		<div class="hero-glow"></div>
+		<div class="hero-inner">
+			<p class="hero-tag">AnyLogic 학습 · 도서 · 무료 리소스</p>
+			<h1 class="hero-title">
+				Simulation Mastery <span class="accent">Starts Here.</span>
+			</h1>
+			<p class="hero-desc">
+				AnyLogic와 시뮬레이션 모델링을 시작하고 깊게 공부할 수 있는 실무형 스타터 패키지입니다. 지금 바로 활용 가능한 자료, 추천 도서, 무료 리소스를 모아두었습니다.
+			</p>
+			<div class="hero-actions">
+				<a href="#services" class="btn-primary">학습 리소스 보기</a>
+				<a href="#about" class="btn-outline">무료 리소스 둘러보기</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- ANYLOGIC LEARNING MATERIALS -->
+	<section id="services">
+		<div class="section-inner">
+			<p class="section-label">// AnyLogic</p>
+			<h2 class="section-title">학습 자료</h2>
+			<p class="section-desc">기초 개념부터 실무 모델링 패턴까지, 시뮬레이션/AnyLogic 학습을 시작하고 확장해 나가기 좋은 출발점들입니다.</p>
+
+			<div class="cards-3">
+				<div class="card">
+					<span class="card-kicker">01 / 공식 문서</span>
+					<h3 class="card-title">AnyLogic Tutorial</h3>
+					<p class="card-desc">모델링 블록, 라이브러리, 내장 개념에 대한 공식 레퍼런스입니다. 모델을 만들면서 "정확히 어떻게 동작하는지"를 확인할 때 가장 먼저 참고할 수 있는 자료입니다.</p>
+					<div class="card-actions">
+						<a class="primary" href="https://anylogic.help/tutorials/index.html" target="_blank" rel="noopener noreferrer">Open Tutorials</a>
+					</div>
+				</div>
+
+				<div class="card">
+					<span class="card-kicker">02 / 입문</span>
+					<h3 class="card-title">무료 학습 교재</h3>
+					<p class="card-desc">시뮬레이션 개념을 예제를 통해 이해할 수 있는 초보자 친화적인 자료입니다. 기초 이론을 익히고 첫 모델을 만들어보기 좋습니다.</p>
+					<div class="card-actions">
+						<a class="primary" href="https://www.anylogic.kr/resources/books/free-simulation-book-and-modeling-tutorials/" target="_blank" rel="noopener noreferrer">Get Free Book</a>
+					</div>
+				</div>
+
+				<div class="card">
+					<span class="card-kicker">03 / 심화</span>
+					<h3 class="card-title">커스텀 UI 기반 시뮬레이션 실험 환경 구축</h3>
+					<p class="card-desc">AnyLogic Private Cloud를 활용하면 별도 설치 없이 브라우저에서 바로 실행되는 시뮬레이션 실험 환경을 구축할 수 있습니다. 파라미터 조작, 실험 실행, 결과 시각화까지 하나의 인터페이스로 통합 — 현장 담당자가 모델을 직접 다룰 수 있는 환경을 만드는 데 유효합니다.</p>
+					<div class="card-actions">
+						<a class="primary" href="https://cloud.anylogic.com/custom-ui-demo/index.html" target="_blank" rel="noopener noreferrer">View Demo</a>
+						<a href="https://open.kakao.com/me/daslab" target="_blank" rel="noopener noreferrer">Ask DAS Lab</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- BOOKS (hidden for now)
+	<section id="clients">
+		<div class="section-inner">
+			<p class="section-label">// Books</p>
+			<h2 class="section-title">추천 도서</h2>
+			<p class="section-desc">단순히 도구 사용법을 넘어서, 모델링 사고방식·실험 설계·신뢰할 수 있는 결과 해석을 돕는 책들을 모았습니다.</p>
+
+			<div class="cards-2">
+				<div class="card">
+					<span class="card-kicker">01 / 기본기</span>
+					<h3 class="card-title">시뮬레이션 모델링 기초</h3>
+					<p class="card-desc">엔티티, 이벤트, 대기열, 자원, 변동성 등 핵심 개념을 체계적으로 다룹니다. 결과를 과신하지 않고 해석하는 법을 익히는 데 도움이 됩니다.</p>
+					<div class="card-actions">
+						<a href="https://www.anylogic.kr/resources/books/free-simulation-book-and-modeling-tutorials/" target="_blank" rel="noopener noreferrer">Free Starter Book</a>
+					</div>
+				</div>
+
+				<div class="card">
+					<span class="card-kicker">02 / 실험</span>
+					<h3 class="card-title">분석 & 검증</h3>
+					<p class="card-desc">검증/검정(verification & validation), 시나리오 설계, 민감도 분석, KPI 관리에 초점을 맞춰 "의사결정에 쓸 수 있는 모델"로 만드는 과정을 다룹니다.</p>
+					<div class="card-actions">
+						<a href="/cdn-cgi/l/email-protection#05607062606b6031373436456b647360772b666a68" target="_blank" rel="noopener noreferrer">Get Recommendations</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	-->
+
+	<!-- FREE RESOURCES -->
+	<section id="about">
+		<div class="section-inner">
+			<p class="section-label">// Free</p>
+			<h2 class="section-title">무료 리소스</h2>
+			<p class="section-desc">오늘 바로 활용할 수 있는 예제 모델, 라이브러리, 커뮤니티 지식, 학습 자료 링크를 모았습니다.</p>
+
+			<div class="cards-2">
+				<div class="card">
+					<span class="card-kicker">01 / Models</span>
+					<h3 class="card-title">예제 모델 라이브러리</h3>
+					<p class="card-desc">바로 실행할 수 있는 예제 모델들을 보면서 구조 설계, 애니메이션, 데이터 수집 방식을 함께 살펴볼 수 있습니다.</p>
+					<div class="card-actions">
+						<a class="primary" href="https://cloud.anylogic.com/models" target="_blank" rel="noopener noreferrer">Browse Models</a>
+					</div>
+				</div>
+
+				<div class="card">
+					<span class="card-kicker">02 / Community</span>
+					<h3 class="card-title">AnyLogic Community</h3>
+					<p class="card-desc">전 세계 사용자들이 올린 질문, 트러블슈팅, 구현 팁을 볼 수 있는 포럼입니다. 막혔을 때나 특수한 케이스를 다룰 때 특히 유용합니다.</p>
+					<div class="card-actions">
+						<a class="primary" href="https://www.anylogic.com/forum/" target="_blank" rel="noopener noreferrer">Open Forum</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- DAS Lab Demo Model Card -->
+			<div style="margin-top: 1px; border: 1px solid var(--border);">
+				<div class="card" style="background: var(--bg2);">
+					<span class="card-kicker">03 / DAS Lab Demo</span>
+					<h3 class="card-title">이차전지 전극 제조공정 시뮬레이션</h3>
+					<p class="card-desc">
+						AnyLogic 공개 모델(Chocolate Production)을 기반으로, 이차전지 전극 제조공정의 흐름과 자원 운영 로직에 맞게 커스터마이징한 데모 모델입니다. 아래 임베드된 모델을 브라우저에서 직접 실행해볼 수 있습니다.<br><br>
+						공정 시뮬레이션 모델 구축 방법, 적용 범위, 도입 타당성 검토에 관한 <strong style="color: var(--cyan);">교육 및 컨설팅 문의</strong>는 DAS Lab으로 연락주세요.
+					</p>
+					<div class="card-actions">
+						<a class="primary" href="https://open.kakao.com/me/daslab" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>
+						<a href="mailto:contact@daslab.co.kr">이메일 문의</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- iframe Live Demo -->
+			<div style="margin-top: 2.5rem;">
+				<p style="font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">// Live Demo — Run in Browser</p>
+				<div style="border: 1px solid var(--border); overflow: hidden; background: #000;">
+					<iframe
+						width="100%"
+						height="650"
+						allow="fullscreen"
+						src="https://cloud.anylogic.com/assets/embed?modelId=9cd89ae3-d8c0-4ed6-905a-ddd9e3008ecb"
+						style="display: block; border: none;">
+					</iframe>
+				</div>
+				<p style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.75rem; letter-spacing: 0.05em;">
+					* 본 데모는 AnyLogic Cloud 서버에서 실행됩니다. AnyLogic Company의 오픈소스 모델(Chocolate Production)을 기반으로 DAS Lab이 수정·배포하였습니다.
+				</p>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer>
+		<div class="footer-inner">
+			<span class="footer-copy">© 2026 DAS Lab. Digital Twin · AI · Simulation — Seoul, Korea</span>
+			<ul class="footer-links">
+				<li><a href="index.html#about">소개</a></li>
+				<li><a href="resource.html">자료실</a></li>
+			</ul>
+		</div>
+	</footer>
+
+</body>
+</html>
