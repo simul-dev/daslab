@@ -20,6 +20,7 @@ html { scroll-behavior: smooth; }
 /* ── I18N TOGGLE ── */
 html[data-lang="ko"] [lang="en"] { display: none !important; }
 html[data-lang="en"] [lang="ko"] { display: none !important; }
+[lang="ko"] { word-break: keep-all; }
 
 body {
 	background: var(--bg);
@@ -222,11 +223,12 @@ nav {
 }
 
 .hero-title .accent { color: var(--cyan); }
+.hero-title-nowrap { white-space: nowrap; }
 
 .hero-desc {
 	font-size: 1.05rem;
 	color: var(--text-dim);
-	max-width: 540px;
+	max-width: 660px;
 	margin-bottom: 3rem;
 	line-height: 1.8;
 }
@@ -335,7 +337,7 @@ section {
 
 .section-desc {
 	color: var(--text-dim);
-	max-width: 560px;
+	max-width: 660px;
 	margin-bottom: 3.5rem;
 }
 
@@ -683,6 +685,7 @@ body::after {
 	.nav-lang { gap: 6px; }
 	section { padding: 70px 1.5rem; }
 	#hero { padding: 100px 1.5rem 60px; }
+	.hero-title-nowrap { white-space: normal; }
 	.stats-inner { grid-template-columns: repeat(2, 1fr); }
 	.services-grid { grid-template-columns: 1fr; }
 	.process-grid { grid-template-columns: 1fr; }
