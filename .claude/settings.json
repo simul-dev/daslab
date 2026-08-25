@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffprobe -v error -show_entries format=duration,size,bit_rate -show_entries stream=width,height,codec_name -of default=noprint_wrappers=1 \"디지털트윈_AI_시뮬레이션_모델링_이산사건_ABM_SD.mp4\")",
+      "Bash(where ffmpeg *)",
+      "Bash(mkdir -p static/video)",
+      "Bash(mv \"디지털트윈_AI_시뮬레이션_모델링_이산사건_ABM_SD.mp4\" static/video/hero-bg.mp4)",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --autoplay-policy=no-user-gesture-required --window-size=1600,1000 --screenshot=\"/c/Users/USER/OneDrive/daslab/daslabhp/hero-preview.png\" --virtual-time-budget=4000 http://localhost:8731/index.html)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8731 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"done\")"
+    ]
+  }
+}
