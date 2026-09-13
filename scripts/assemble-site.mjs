@@ -24,6 +24,8 @@ const homepageFiles = [
   "index_en.html",
   "resource.html",
   "resource_en.html",
+  "demo.html",
+  "demo_en.html",
   "CNAME",
 ];
 

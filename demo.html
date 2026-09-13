@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html lang="ko" data-lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="DAS Lab browser-based simulation and digital twin demo models across industries." />
+	<title>DAS Lab — Interactive Demos</title>
+	<link rel="icon" type="image/png" href="static/logo/daslab_logo_dark_simple.png" />
+	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="static/css/daslab.css" />
+	<link rel="stylesheet" href="static/css/navigation.css" />
+	<link rel="stylesheet" href="static/css/demo.css" />
+	<script>
+	(function () {
+		try {
+			var params = new URLSearchParams(location.search);
+			var lang = params.get('lang') || localStorage.getItem('daslab-lang') || 'ko';
+			if (lang !== 'en') lang = 'ko';
+			document.documentElement.setAttribute('data-lang', lang);
+			document.documentElement.lang = lang;
+		} catch (e) {}
+	})();
+	</script>
+	<script defer src="static/js/navigation.js"></script>
+</head>
+<body class="demo-hub-page">
+
+	<nav>
+		<a href="index.html" class="nav-logo">
+			<img class="nav-logo-img" src="static/logo/daslab_logo_dark_simple.svg" alt="DAS Lab" />
+			<span class="nav-logo-sub">Digital Twin · AI · Simulation</span>
+		</a>
+		<ul class="nav-links" id="site-navigation">
+			<li><a href="index.html#services" lang="ko">서비스</a><a href="index.html#services" lang="en">Services</a></li>
+			<li><a href="index.html#clients" lang="ko">클라이언트</a><a href="index.html#clients" lang="en">Clients</a></li>
+			<li><a href="index.html#about" lang="ko">소개</a><a href="index.html#about" lang="en">About</a></li>
+			<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
+			<li class="nav-demo-item">
+				<a class="nav-demo-trigger" href="demo.html" lang="ko" aria-current="page" aria-haspopup="true">데모 <span aria-hidden="true">▾</span></a>
+				<a class="nav-demo-trigger" href="demo.html" lang="en" aria-current="page" aria-haspopup="true">Demo <span aria-hidden="true">▾</span></a>
+				<div class="nav-demo-panel">
+					<p class="nav-demo-heading"><span lang="ko">산업 분야</span><span lang="en">Industries</span></p>
+					<ul class="nav-demo-list">
+						<li><a href="#manufacturing"><span lang="ko">생산라인</span><span lang="en">Manufacturing</span></a></li>
+						<li><a href="#fulfillment"><span lang="ko">풀필먼트</span><span lang="en">Fulfillment</span></a></li>
+						<li><a href="#ports"><span lang="ko">항만</span><span lang="en">Ports &amp; Terminals</span></a></li>
+						<li><a href="#civil-construction"><span lang="ko">토목공사</span><span lang="en">Civil Construction</span></a></li>
+						<li><a href="#nuclear"><span lang="ko">원자력</span><span lang="en">Nuclear</span></a></li>
+						<li><a href="#supply-chain"><span lang="ko">공급망</span><span lang="en">Supply Chain</span></a></li>
+						<li><a href="#transportation-systems"><span lang="ko">교통시스템</span><span lang="en">Transportation Systems</span></a></li>
+						<li><a href="#rail"><span lang="ko">철도</span><span lang="en">Rail</span></a></li>
+						<li><a href="#defense"><span lang="ko">국방망</span><span lang="en">Defense Networks</span></a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="nav-actions">
+			<div class="nav-lang" aria-label="Language switch">
+				<a href="demo.html?lang=ko" data-lang-btn="ko">KR</a>
+				<span class="nav-lang-sep">|</span>
+				<a href="demo.html?lang=en" data-lang-btn="en">EN</a>
+			</div>
+			<a href="index.html#contact" class="nav-cta">Contact</a>
+		</div>
+		<button class="nav-menu-toggle" type="button" aria-label="메뉴 / Menu" aria-expanded="false" aria-controls="site-navigation">
+			<span class="nav-menu-icon" aria-hidden="true"><i></i><i></i></span>
+			<span lang="ko">메뉴</span><span lang="en">Menu</span>
+		</button>
+	</nav>
+
+	<header class="demo-hub-hero">
+		<div class="demo-hero-glow"></div>
+		<div class="demo-hero-inner">
+			<p class="hero-tag">Interactive Models · Browser-based Simulation</p>
+			<h1 class="hero-title" lang="ko">복잡한 시스템을<br><span class="accent">화면 안에서 움직여보세요.</span></h1>
+			<h1 class="hero-title" lang="en">See Complex Systems<br><span class="accent">in Motion.</span></h1>
+			<p class="hero-desc" lang="ko">현실에 적용하기 전에 복잡한 운영 시스템의 흐름과 제약을 직접 탐색해 보세요. DAS Lab의 브라우저 기반 모델은 산업별 공정, 대기열, 자원과 운영 정책의 영향을 눈에 보이게 보여줍니다.</p>
+			<p class="hero-desc" lang="en">Explore how complex operating systems behave before decisions reach the real world. DAS Lab’s browser-based models make flows, queues, resources, and operating policies visible across industries.</p>
+			<div class="hero-actions">
+				<a href="#fulfillment" class="btn-primary" lang="ko">실행 가능한 모델 보기</a>
+				<a href="#fulfillment" class="btn-primary" lang="en">Explore live models</a>
+				<a href="index.html#contact" class="btn-outline" lang="ko">프로젝트 상담</a>
+				<a href="index.html#contact" class="btn-outline" lang="en">Discuss a model</a>
+			</div>
+			<div class="demo-hero-stats" aria-label="Demo catalogue summary">
+				<div><strong>09</strong><span lang="ko">산업 분야</span><span lang="en">Industries</span></div>
+				<div><strong>01</strong><span lang="ko">실행 모델</span><span lang="en">Live model</span></div>
+				<div><strong>100%</strong><span lang="ko">브라우저 기반</span><span lang="en">Browser based</span></div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section class="demo-directory">
+			<div class="section-inner">
+				<p class="section-label">// Model directory</p>
+				<h2 id="directory-title-ko" class="section-title" lang="ko">산업 분야별 데모</h2>
+				<h2 id="directory-title-en" class="section-title" lang="en">Demos by Industry</h2>
+				<p class="section-desc" lang="ko">분야를 선택하면 해당 모델의 목적, 공정 범위와 주요 분석 지표를 확인할 수 있습니다.</p>
+				<p class="section-desc" lang="en">Choose an industry to review each model’s purpose, process scope, and core analysis metrics.</p>
+				<div class="demo-directory-grid">
+					<a href="#manufacturing"><span class="directory-number">01</span><strong lang="ko">생산라인</strong><strong lang="en">Manufacturing</strong><small>PLANNED</small></a>
+					<a href="#fulfillment" class="is-live"><span class="directory-number">02</span><strong lang="ko">풀필먼트</strong><strong lang="en">Fulfillment</strong><small>LIVE</small></a>
+					<a href="#ports"><span class="directory-number">03</span><strong lang="ko">항만</strong><strong lang="en">Ports &amp; Terminals</strong><small>PLANNED</small></a>
+					<a href="#civil-construction"><span class="directory-number">04</span><strong lang="ko">토목공사</strong><strong lang="en">Civil Construction</strong><small>PLANNED</small></a>
+					<a href="#nuclear"><span class="directory-number">05</span><strong lang="ko">원자력</strong><strong lang="en">Nuclear</strong><small>PLANNED</small></a>
+					<a href="#supply-chain"><span class="directory-number">06</span><strong lang="ko">공급망</strong><strong lang="en">Supply Chain</strong><small>PLANNED</small></a>
+					<a href="#transportation-systems"><span class="directory-number">07</span><strong lang="ko">교통시스템</strong><strong lang="en">Transportation Systems</strong><small>PLANNED</small></a>
+					<a href="#rail"><span class="directory-number">08</span><strong lang="ko">철도</strong><strong lang="en">Rail</strong><small>PLANNED</small></a>
+					<a href="#defense"><span class="directory-number">09</span><strong lang="ko">국방망</strong><strong lang="en">Defense Networks</strong><small>PLANNED</small></a>
+				</div>
+			</div>
+		</section>
+
+		<section id="manufacturing" class="demo-domain">
+			<div class="section-inner">
+				<div class="demo-domain-heading"><div><p class="section-label">// Manufacturing demo</p><h2 class="section-title" lang="ko">생산라인 운영 최적화</h2><h2 class="section-title" lang="en">Production Line Operations</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div>
+				<article class="demo-model-panel">
+					<div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">설비, 작업자, 버퍼, 품질 검사와 제품 흐름을 하나의 모델로 연결해 병목, 생산량, 재공품과 설비 가동률의 변화를 비교합니다.</p><p lang="en">Connect machines, operators, buffers, quality inspection, and product flow in one model to compare bottlenecks, throughput, WIP, and utilization.</p><ul class="demo-model-metrics"><li>Throughput</li><li>Work in process</li><li>Equipment utilization</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div>
+					<div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Material</li><li><b>02</b>Process</li><li><b>03</b>Buffer</li><li><b>04</b>Inspection</li><li><b>05</b>Finished goods</li></ol></div>
+				</article>
+			</div>
+		</section>
+
+		<section id="fulfillment" class="demo-domain demo-domain-live">
+			<div class="section-inner">
+				<div class="demo-domain-heading"><div><p class="section-label">// Fulfillment demo</p><h2 class="section-title" lang="ko">풀필먼트 자동화 시뮬레이션</h2><h2 class="section-title" lang="en">Fulfillment Automation Simulation</h2></div><span class="demo-status is-live">LIVE MODEL</span></div>
+				<article class="demo-card">
+					<div class="demo-card-content">
+						<p class="demo-model-label">MODEL DESCRIPTION</p>
+						<p class="demo-card-kicker">Discrete Event Simulation / Digital Twin</p>
+						<h3 class="demo-card-title" lang="ko">주문부터 출고까지, 직접 운영해보세요.</h3>
+						<h3 class="demo-card-title" lang="en">Operate the flow from order to shipment.</h3>
+						<p class="demo-card-desc" lang="ko">주문 투입, 인덕션, DPS 피킹, 순환 컨베이어와 출고를 하나의 3D 이산사건 모델로 연결합니다. 작업 속도와 운영 조건을 바꾸며 대기열, 처리량과 자원 가동률의 변화를 직접 확인할 수 있습니다.</p>
+						<p class="demo-card-desc" lang="en">Run a live 3D discrete-event model connecting order release, induction, DPS picking, conveyor recirculation, and shipping. Change operating conditions and observe queues, throughput, and resource utilization in real time.</p>
+						<ul class="demo-features"><li>Order → Induction → DPS Picking</li><li>Recirculation → Shipping</li><li>KPI · Charts · Event log</li><li lang="ko">로그인 불필요</li><li lang="en">No sign-in required</li></ul>
+						<a class="demo-action" href="/demo/logistics/fulfillment/"><span lang="ko">풀필먼트 데모 실행</span><span lang="en">Open fulfillment demo</span><span aria-hidden="true">↗</span></a>
+					</div>
+					<div class="demo-preview" aria-hidden="true">
+						<div class="demo-preview-header"><span>LIVE SYSTEM / FC-01</span><span class="demo-live-status"><i></i> READY</span></div>
+						<div class="demo-flow"><div class="demo-flow-node"><span>01</span>ORDER / INDUCTION</div><div class="demo-flow-line"><i></i><i></i><i></i></div><div class="demo-flow-node"><span>02</span>DPS PICKING</div><div class="demo-flow-line"><i></i><i></i><i></i></div><div class="demo-flow-node"><span>03</span>RECIRCULATION</div><div class="demo-flow-line"><i></i><i></i><i></i></div><div class="demo-flow-node"><span>04</span>SHIPPING</div></div>
+						<div class="demo-metrics"><div><span>3D SCENE</span><strong>ACTIVE</strong></div><div><span>KPI</span><strong>LIVE</strong></div><div><span>EVENT LOG</span><strong>STREAMING</strong></div></div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section id="ports" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Ports demo</p><h2 class="section-title" lang="ko">항만 터미널 운영</h2><h2 class="section-title" lang="en">Port &amp; Terminal Operations</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">선박 입항과 접안, 안벽 크레인, 야드 장치와 게이트 반출입을 연결해 선석 체류시간, 장비 생산성과 야드 혼잡을 분석합니다.</p><p lang="en">Connect vessel arrival and berthing, quay cranes, yard operations, and gate flows to examine berth time, equipment productivity, and yard congestion.</p><ul class="demo-model-metrics"><li>Berth time</li><li>Moves per hour</li><li>Yard occupancy</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Vessel</li><li><b>02</b>Quay crane</li><li><b>03</b>Yard</li><li><b>04</b>Gate / Rail</li></ol></div></article></div>
+		</section>
+
+		<section id="civil-construction" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Civil construction demo</p><h2 class="section-title" lang="ko">토목공사 공정 시뮬레이션</h2><h2 class="section-title" lang="en">Civil Construction Operations</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">굴착, 운반, 시공과 검사를 장비·작업조·작업구역 제약과 함께 모델링해 공기, 장비 가동률과 지연 위험을 비교합니다.</p><p lang="en">Model excavation, hauling, installation, and inspection with equipment, crew, and work-zone constraints to compare duration, utilization, and delay risk.</p><ul class="demo-model-metrics"><li>Project duration</li><li>Equipment utilization</li><li>Delay risk</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Excavation</li><li><b>02</b>Hauling</li><li><b>03</b>Installation</li><li><b>04</b>Inspection</li></ol></div></article></div>
+		</section>
+
+		<section id="nuclear" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Nuclear demo</p><h2 class="section-title" lang="ko">원자력 설비 정비 계획</h2><h2 class="section-title" lang="en">Nuclear Maintenance Planning</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">정비 작업, 작업허가, 인력·장비·자재 흐름과 작업 간 선후행 관계를 모델링해 정비 일정, 자원 충돌과 지연 위험을 분석합니다.</p><p lang="en">Model maintenance work, permits, personnel, equipment, material flows, and task dependencies to examine schedules, resource conflicts, and delay risk.</p><ul class="demo-model-metrics"><li>Outage duration</li><li>Resource conflicts</li><li>Schedule risk</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Work package</li><li><b>02</b>Permit</li><li><b>03</b>Maintenance</li><li><b>04</b>Inspection</li></ol></div></article></div>
+		</section>
+
+		<section id="supply-chain" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Supply chain demo</p><h2 class="section-title" lang="ko">엔드투엔드 공급망 운영</h2><h2 class="section-title" lang="en">End-to-End Supply Chain</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">공급사, 생산거점, 물류센터와 고객 수요를 연결해 재고 정책, 보충 주기와 운송 차질이 서비스 수준과 리드타임에 미치는 영향을 비교합니다.</p><p lang="en">Connect suppliers, plants, distribution centers, and customer demand to compare how inventory policies, replenishment cycles, and transport disruptions affect service levels and lead time.</p><ul class="demo-model-metrics"><li>Service level</li><li>Inventory</li><li>Lead time</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Supplier</li><li><b>02</b>Plant</li><li><b>03</b>Distribution center</li><li><b>04</b>Customer</li></ol></div></article></div>
+		</section>
+
+		<section id="transportation-systems" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Transportation systems demo</p><h2 class="section-title" lang="ko">교통 네트워크 운영</h2><h2 class="section-title" lang="en">Transportation Network Operations</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">시간대별 교통 수요, 교차로, 신호와 차량 흐름을 모델링해 통행시간, 대기행렬과 네트워크 처리용량을 분석합니다.</p><p lang="en">Model time-varying demand, intersections, signal control, and vehicle flows to examine travel time, queues, and network capacity.</p><ul class="demo-model-metrics"><li>Travel time</li><li>Queue length</li><li>Network capacity</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Demand</li><li><b>02</b>Network</li><li><b>03</b>Traffic control</li><li><b>04</b>Destination</li></ol></div></article></div>
+		</section>
+
+		<section id="rail" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Rail demo</p><h2 class="section-title" lang="ko">철도 운행 및 용량 계획</h2><h2 class="section-title" lang="en">Rail Operations &amp; Capacity Planning</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">열차 운행계획, 선로·플랫폼 점유, 배차와 차량기지 운영을 연결해 정시성, 운행 간격과 노선 용량을 비교합니다.</p><p lang="en">Connect timetables, track and platform occupancy, dispatching, and depot operations to compare punctuality, headways, and line capacity.</p><ul class="demo-model-metrics"><li>Punctuality</li><li>Headway</li><li>Line capacity</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Timetable</li><li><b>02</b>Dispatch</li><li><b>03</b>Line / Station</li><li><b>04</b>Depot</li></ol></div></article></div>
+		</section>
+
+		<section id="defense" class="demo-domain">
+			<div class="section-inner"><div class="demo-domain-heading"><div><p class="section-label">// Defense demo</p><h2 class="section-title" lang="ko">국방 물류망 운영 분석</h2><h2 class="section-title" lang="en">Defense Logistics Network</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div><article class="demo-model-panel"><div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">수요 발생, 자원 할당, 수송과 유지지원 흐름을 시나리오별로 모델링해 대응시간, 가용성과 자원 활용도를 분석합니다.</p><p lang="en">Model demand, resource allocation, transport, and sustainment flows across scenarios to examine response time, availability, and resource utilization.</p><ul class="demo-model-metrics"><li>Response time</li><li>Availability</li><li>Resource utilization</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div><div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Demand</li><li><b>02</b>Allocation</li><li><b>03</b>Transport</li><li><b>04</b>Sustainment</li></ol></div></article></div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="footer-inner">
+			<span class="footer-copy">© 2026 DAS Lab. Digital Twin · AI · Simulation — Seoul, Korea</span>
+			<ul class="footer-links">
+				<li><a href="index.html#services" lang="ko">서비스</a><a href="index.html#services" lang="en">Services</a></li>
+				<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
+				<li><a href="demo.html" lang="ko">데모</a><a href="demo.html" lang="en">Demo</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<script>
+	(function () {
+		var LANG_KEY = 'daslab-lang';
+		function applyLang(lang) {
+			document.documentElement.setAttribute('data-lang', lang);
+			document.documentElement.lang = lang;
+			document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (link) {
+				var active = link.getAttribute('data-lang-btn') === lang;
+				link.classList.toggle('is-active', active);
+				if (active) link.setAttribute('aria-current', 'page');
+				else link.removeAttribute('aria-current');
+			});
+			try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+		}
+		document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (link) {
+			link.addEventListener('click', function (event) {
+				event.preventDefault();
+				var lang = link.getAttribute('data-lang-btn');
+				applyLang(lang);
+				try {
+					var url = new URL(window.location.href);
+					url.searchParams.set('lang', lang);
+					history.replaceState(null, '', url.pathname + url.search + url.hash);
+				} catch (error) {}
+			});
+		});
+		applyLang(document.documentElement.getAttribute('data-lang') || 'ko');
+	})();
+	</script>
+</body>
+</html>

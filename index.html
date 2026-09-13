@@ -7,6 +7,8 @@
 	<link rel="icon" type="image/png" href="static/logo/daslab_logo_dark_simple.png" />
 	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="static/css/daslab.css" />
+	<link rel="stylesheet" href="static/css/navigation.css" />
+	<script defer src="static/js/navigation.js"></script>
 	<script>
 	(function () {
 		try {
@@ -14,6 +16,7 @@
 			var lang = params.get('lang') || localStorage.getItem('daslab-lang') || 'ko';
 			if (lang !== 'en') lang = 'ko';
 			document.documentElement.setAttribute('data-lang', lang);
+			document.documentElement.lang = lang;
 		} catch (e) {}
 	})();
 	</script>
@@ -26,21 +29,42 @@
 			<img class="nav-logo-img" src="static/logo/daslab_logo_dark_simple.svg" alt="DAS Lab" />
 			<span class="nav-logo-sub">Digital Twin · AI · Simulation</span>
 		</a>
-		<ul class="nav-links">
+		<ul class="nav-links" id="site-navigation">
 			<li><a href="#services" lang="ko">서비스</a><a href="#services" lang="en">Services</a></li>
-			<li><a href="#demo" lang="ko">데모</a><a href="#demo" lang="en">Demo</a></li>
 			<li><a href="#clients" lang="ko">클라이언트</a><a href="#clients" lang="en">Clients</a></li>
 			<li><a href="#about" lang="ko">소개</a><a href="#about" lang="en">About</a></li>
 			<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
+			<li class="nav-demo-item">
+				<a class="nav-demo-trigger" href="demo.html" lang="ko" aria-haspopup="true">데모 <span aria-hidden="true">▾</span></a>
+				<a class="nav-demo-trigger" href="demo.html" lang="en" aria-haspopup="true">Demo <span aria-hidden="true">▾</span></a>
+				<div class="nav-demo-panel">
+					<p class="nav-demo-heading"><span lang="ko">산업 분야</span><span lang="en">Industries</span></p>
+					<ul class="nav-demo-list">
+						<li><a href="demo.html#manufacturing"><span lang="ko">생산라인</span><span lang="en">Manufacturing</span></a></li>
+						<li><a href="demo.html#fulfillment"><span lang="ko">풀필먼트</span><span lang="en">Fulfillment</span></a></li>
+						<li><a href="demo.html#ports"><span lang="ko">항만</span><span lang="en">Ports &amp; Terminals</span></a></li>
+						<li><a href="demo.html#civil-construction"><span lang="ko">토목공사</span><span lang="en">Civil Construction</span></a></li>
+						<li><a href="demo.html#nuclear"><span lang="ko">원자력</span><span lang="en">Nuclear</span></a></li>
+						<li><a href="demo.html#supply-chain"><span lang="ko">공급망</span><span lang="en">Supply Chain</span></a></li>
+						<li><a href="demo.html#transportation-systems"><span lang="ko">교통시스템</span><span lang="en">Transportation Systems</span></a></li>
+						<li><a href="demo.html#rail"><span lang="ko">철도</span><span lang="en">Rail</span></a></li>
+						<li><a href="demo.html#defense"><span lang="ko">국방망</span><span lang="en">Defense Networks</span></a></li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 		<div class="nav-actions">
 			<div class="nav-lang" aria-label="Language switch">
-				<a href="#" data-lang-btn="ko">KR</a>
+				<a href="index.html?lang=ko" data-lang-btn="ko">KR</a>
 				<span class="nav-lang-sep">|</span>
-				<a href="#" data-lang-btn="en">EN</a>
+				<a href="index.html?lang=en" data-lang-btn="en">EN</a>
 			</div>
 			<a href="#contact" class="nav-cta">Contact</a>
 		</div>
+		<button class="nav-menu-toggle" type="button" aria-label="메뉴 / Menu" aria-expanded="false" aria-controls="site-navigation">
+			<span class="nav-menu-icon" aria-hidden="true"><i></i><i></i></span>
+			<span lang="ko">메뉴</span><span lang="en">Menu</span>
+		</button>
 	</nav>
 
 	<!-- HERO -->
@@ -153,60 +177,6 @@
 					<p class="service-desc" lang="en">Don't see your problem above? If it's a complex system decision, we start by finding the right technology mix — together.</p>
 				</div>
 			</div>
-		</div>
-	</section>
-
-	<!-- INTERACTIVE DEMO -->
-	<section id="demo">
-		<div class="section-inner">
-			<p class="section-label">// Interactive demo</p>
-			<h2 id="demo-title-ko" class="section-title" lang="ko">브라우저에서 직접 경험하는 물류 Digital Twin</h2>
-			<h2 id="demo-title-en" class="section-title" lang="en">Explore a Logistics Digital Twin in Your Browser</h2>
-			<p class="section-desc" lang="ko">주문 투입부터 피킹, 컨베이어 이송, 출고까지 풀필먼트 운영 전 과정을 실시간 3D 시뮬레이션으로 살펴보세요.</p>
-			<p class="section-desc" lang="en">Explore the complete fulfillment flow—from order release and picking to conveyor transport and shipping—in a real-time 3D simulation.</p>
-
-			<article class="demo-card">
-				<div class="demo-card-content">
-					<p class="demo-card-kicker" lang="ko">Fulfillment Automation Simulation</p>
-					<p class="demo-card-kicker" lang="en">Live model / Logistics</p>
-					<h3 class="demo-card-title" lang="ko">풀필먼트 자동화 시뮬레이션</h3>
-					<h3 class="demo-card-title" lang="en">Fulfillment Automation Simulation</h3>
-					<p class="demo-card-desc" lang="ko">이산사건 시뮬레이션과 3D Digital Twin으로 작업 속도와 운영 조건을 바꾸며 주문, 대기열, 피킹 스테이션, 컨베이어, 출고 운영의 변화를 직접 확인할 수 있습니다.</p>
-					<p class="demo-card-desc" lang="en">Use discrete event simulation and a 3D digital twin to change operating conditions and observe orders, queues, picking stations, conveyors, and shipping performance in real time.</p>
-					<ul class="demo-features">
-						<li>Discrete Event Simulation / Digital Twin</li>
-						<li>Order → Picking → Conveyor → Shipping</li>
-						<li lang="ko">브라우저 실행 · 로그인 불필요</li>
-						<li lang="en">Runs in your browser · No sign-in required</li>
-					</ul>
-					<a class="demo-action" href="/demo/logistics/fulfillment/">
-						<span lang="ko">인터랙티브 데모 열기</span>
-						<span lang="en">Open interactive demo</span>
-						<span aria-hidden="true">↗</span>
-					</a>
-				</div>
-
-				<div class="demo-preview" aria-hidden="true">
-					<div class="demo-preview-header">
-						<span>LIVE SYSTEM</span>
-						<span class="demo-live-status"><i></i> RUNNING</span>
-					</div>
-					<div class="demo-flow">
-						<div class="demo-flow-node"><span>01</span>ORDER</div>
-						<div class="demo-flow-line"><i></i><i></i><i></i></div>
-						<div class="demo-flow-node"><span>02</span>PICKING</div>
-						<div class="demo-flow-line"><i></i><i></i><i></i></div>
-						<div class="demo-flow-node"><span>03</span>CONVEYOR</div>
-						<div class="demo-flow-line"><i></i><i></i><i></i></div>
-						<div class="demo-flow-node"><span>04</span>SHIPPING</div>
-					</div>
-					<div class="demo-metrics">
-						<div><span>THROUGHPUT</span><strong>LIVE</strong></div>
-						<div><span>3D SCENE</span><strong>ACTIVE</strong></div>
-						<div><span>EVENT LOG</span><strong>STREAMING</strong></div>
-					</div>
-				</div>
-			</article>
 		</div>
 	</section>
 
@@ -401,6 +371,7 @@
 
 		function applyLang(lang) {
 			document.documentElement.setAttribute('data-lang', lang);
+			document.documentElement.lang = lang;
 			document.querySelectorAll('[data-ph-ko]').forEach(function (el) {
 				el.placeholder = lang === 'en' ? el.getAttribute('data-ph-en') : el.getAttribute('data-ph-ko');
 			});
@@ -415,11 +386,17 @@
 			try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
 		}
 
-		document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (a) {
-			a.addEventListener('click', function (e) {
-				e.preventDefault();
-				applyLang(a.getAttribute('data-lang-btn'));
-			});
+			document.querySelectorAll('.nav-lang [data-lang-btn]').forEach(function (a) {
+				a.addEventListener('click', function (e) {
+					e.preventDefault();
+					var lang = a.getAttribute('data-lang-btn');
+					applyLang(lang);
+					try {
+						var url = new URL(window.location.href);
+						url.searchParams.set('lang', lang);
+						history.replaceState(null, '', url.pathname + url.search + url.hash);
+					} catch (err) {}
+				});
 		});
 
 		applyLang(document.documentElement.getAttribute('data-lang') || 'ko');
@@ -465,7 +442,7 @@
 			<span class="footer-copy">© 2026 DAS Lab. Digital Twin · AI · Simulation — Seoul, Korea</span>
 			<ul class="footer-links">
 				<li><a href="#about" lang="ko">소개</a><a href="#about" lang="en">About</a></li>
-				<li><a href="#demo" lang="ko">데모</a><a href="#demo" lang="en">Demo</a></li>
+				<li><a href="demo.html" lang="ko">데모</a><a href="demo.html" lang="en">Demo</a></li>
 				<li><a href="resource.html" lang="ko">자료실</a><a href="resource.html" lang="en">Resources</a></li>
 			</ul>
 		</div>
