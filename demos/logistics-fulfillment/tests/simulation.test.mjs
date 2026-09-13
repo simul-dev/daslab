@@ -105,8 +105,9 @@ function assertRuntimeState(simulation){
     const delta=(order.slot-order.previousSlot+PICK_LOOP_CAP)%PICK_LOOP_CAP;
     assert.ok(delta===0||delta===1,'A loop box advances one circular slot at a time');
     assert.ok(Number.isInteger(order.recirculations)&&order.recirculations>=0);
-    const expectedColor=order.stage==='pickingLoop'&&order.previousSlot===-1?ORDER_COLORS.waiting:ORDER_COLORS.moving;
-    assert.equal(orderPosition(order,simulation).color,expectedColor,'Only a new box at the loop entry uses the waiting color');
+    const projected=orderPosition(order,simulation);
+    const expectedColor=(order.stage==='pickingLoop'&&order.previousSlot===-1)||projected.z>PICK_LOOP_FRONT_Z+1e-7?ORDER_COLORS.waiting:ORDER_COLORS.moving;
+    assert.equal(projected.color,expectedColor,'Only loop infeed and the physical recirculation return use the waiting color');
   });
 
   for(const [slot,reservation] of simulation.mergeReservations){
@@ -231,7 +232,7 @@ function runEventwise(){
     }
     originalSetStage(order,stage);
   };
-  let events=0,sawEntryWaiting=false,sawMovingLoop=false;
+  let events=0,sawEntryWaiting=false,sawRecirculationWaiting=false,sawFrontMoving=false;
   while(!simulation.finished){
     const next=simulation.calendar.peek();assert.ok(Number.isFinite(next),'Live model must retain a future event');
     simulation.advance(Math.max(simulation.time,next-1e-7));
@@ -245,9 +246,10 @@ function runEventwise(){
     }
     for(const id of simulation.pickingLoop){
       if(id===null)continue;
-      const order=simulation.orders.get(id),color=orderPosition(order,simulation).color;
-      if(order.stage==='pickingLoop'&&order.previousSlot===-1){sawEntryWaiting=true;assert.equal(color,ORDER_COLORS.waiting);}
-      else{sawMovingLoop=true;assert.equal(color,ORDER_COLORS.moving);}
+      const order=simulation.orders.get(id),projected=orderPosition(order,simulation),atEntry=order.stage==='pickingLoop'&&order.previousSlot===-1,onRecirculation=projected.z>PICK_LOOP_FRONT_Z+1e-7;
+      if(atEntry){sawEntryWaiting=true;assert.equal(projected.color,ORDER_COLORS.waiting);}
+      else if(onRecirculation){sawRecirculationWaiting=true;assert.equal(projected.color,ORDER_COLORS.waiting);}
+      else{sawFrontMoving=true;assert.equal(projected.color,ORDER_COLORS.moving);}
     }
     if(++events>300000)throw new Error('Eventwise model did not drain');
   }
@@ -255,7 +257,7 @@ function runEventwise(){
   for(const [id,history] of histories)assert.deepEqual(history,expected,`Allowed stage sequence for order ${id}`);
   assert.equal(histories.size,simulation.params.orders);
   assert.deepEqual(loadingStarts,trolleyArrivals,'The two loaders preserve auto-stow trolley FIFO order');
-  assert.ok(sawEntryWaiting&&sawMovingLoop,'The probe observes both waiting entry and moving loop colors');
+  assert.ok(sawEntryWaiting&&sawRecirculationWaiting&&sawFrontMoving,'The probe observes waiting entry/recirculation boxes and moving boxes on the front passing line');
   assert.ok(simulation.recirculations>0,'Busy target stations force physical recirculation');
   return simulation;
 }
@@ -398,6 +400,12 @@ assert.ok(Math.abs(pathLength(OUT_PATH)/(OUT_CAP-1)-1.2)<1e-9,'Straight outbound
 assert.ok(PICK_LOOP_PITCH>BOX_WIDTH+BOX_DEPTH);
 assert.ok(Math.abs(PICK_LOOP_PITCH-1.2)<1e-9);
 assert.equal(beltFraction(0,IN_CAP),0);assert.equal(beltFraction(IN_CAP-1,IN_CAP),1);assert.equal(loopFraction(0,PICK_LOOP_CAP),0);assert.equal(loopFraction(PICK_LOOP_CAP,PICK_LOOP_CAP),0);
+const loopColorProbe=(stage,slot,previousSlot=slot)=>orderPosition({stage,slot,previousSlot,moveAt:0,stageAt:0},{time:0,params:DEFAULTS});
+assert.equal(loopColorProbe('pickingLoop',0,-1).color,ORDER_COLORS.waiting,'Loop infeed is waiting');
+assert.equal(loopColorProbe('pickingLoop',PICK_LOOP_EXIT_SLOT-1).color,ORDER_COLORS.moving,'Pre-pick box on front passing line is moving');
+assert.equal(loopColorProbe('pickedLoop',PICK_LOOP_EXIT_SLOT-1).color,ORDER_COLORS.moving,'Picked box on front passing line is moving');
+assert.equal(loopColorProbe('pickingLoop',PICK_LOOP_EXIT_SLOT+1).color,ORDER_COLORS.waiting,'Pre-pick box on recirculation return is waiting');
+assert.equal(loopColorProbe('pickedLoop',PICK_LOOP_EXIT_SLOT+1).color,ORDER_COLORS.waiting,'Picked box on recirculation return is waiting');
 assert.deepEqual(pointOnPath(IN_PATH,0),IN_PATH[0]);assert.deepEqual(pointOnPath(IN_PATH,1),PICK_LOOP_INFEED);
 assert.deepEqual(PICK_LOOP_PATH[0],PICK_LOOP_ENTRY);assert.deepEqual(PICK_LOOP_PATH.at(-1),PICK_LOOP_ENTRY);assert.deepEqual(OUT_PATH[0],PICK_EXIT);assert.deepEqual(OUT_PATH.at(-1),TROLLEY_ENTRY);
 assert.equal(OUT_PATH.length,2,'Outbound is one straight conveyor with no doglegs');
@@ -470,4 +478,3 @@ console.log('PASS: two adjacent DPS lanes, deck-covered orthogonal transfers, sh
 for(const [name,simulation] of Object.entries({baseline,moreWorkers,highDemand,slowConveyor,light,eventwise,saturation,backpressure,egressInterlock})){
   const metrics=simulation.metrics();console.log(JSON.stringify({name,orders:metrics.received,completedAtClose:metrics.dailyThroughput,leadMin:+metrics.leadAvg.toFixed(2),peakWip:metrics.peakWip,loopPeak:metrics.maxQueue,recirculations:metrics.recirculations,workerPct:+metrics.workerUtil.toFixed(2),loaderPct:metrics.shippingLoaders.map(loader=>+loader.util.toFixed(2)),finishSec:metrics.time}));
 }
-

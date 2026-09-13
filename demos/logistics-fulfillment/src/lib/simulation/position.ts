@@ -8,6 +8,7 @@ import {
   PICK_LOOP_CAP,
   PICK_LOOP_INFEED,
   PICK_LOOP_ENTRY,
+  PICK_LOOP_FRONT_Z,
   PICK_LOOP_PATH,
   beltFraction,
   beltStepSeconds,
@@ -37,7 +38,7 @@ export function orderPosition(o:Order,e:Simulation):{x:number;z:number;y:number;
   }else if(o.stage==='pickingLoop'||o.stage==='pickedLoop'){
     const f=Math.min(1,(e.time-o.moveAt)/loopStepSeconds(PICK_LOOP_PATH,PICK_LOOP_CAP,e.params.conveyorSpeed));
     if(o.previousSlot===-1){[x,z]=pointOnPath([PICK_LOOP_INFEED,PICK_LOOP_ENTRY],f);color=o.stage==='pickingLoop'?ORDER_COLORS.waiting:ORDER_COLORS.moving;}
-    else{const slot=o.previousSlot===PICK_LOOP_CAP-1&&o.slot===0?o.previousSlot+f:o.previousSlot+(o.slot-o.previousSlot)*f;[x,z]=pointOnPath(PICK_LOOP_PATH,loopFraction(slot,PICK_LOOP_CAP));color=ORDER_COLORS.moving;}
+    else{const slot=o.previousSlot===PICK_LOOP_CAP-1&&o.slot===0?o.previousSlot+f:o.previousSlot+(o.slot-o.previousSlot)*f;[x,z]=pointOnPath(PICK_LOOP_PATH,loopFraction(slot,PICK_LOOP_CAP));color=z>PICK_LOOP_FRONT_Z+1e-7?ORDER_COLORS.waiting:ORDER_COLORS.moving;}
   }else if(o.stage==='toStation'){
     const route=stationLayout(o.worker,e.params.workers);
     const duration=stationTravelSeconds(o.worker,e.params.workers,'approach',e.params.conveyorSpeed);
@@ -76,4 +77,3 @@ export function shippingLoaderPosition(index:number,e:Simulation){
   if(dt<=LOADER_PICKUP){const [x,z]=pointOnPath([home,trolleySlotPoint(loader.trolleySlot)],dt/LOADER_PICKUP);return {x,z,carrying:false};}
   const [x,z]=pointOnPath(loaderCarryPath(loader.trolleySlot,index),Math.min(1,(dt-LOADER_PICKUP)/(LOADING-LOADER_PICKUP)));return {x,z,carrying:true};
 }
-
