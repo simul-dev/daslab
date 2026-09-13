@@ -29,11 +29,12 @@ export default function Home(){
  const order=selected===null?undefined:sim.orders.get(selected);const statusLabel={ready:'READY TO RUN',running:metrics.time>=DAY?'DRAINING ORDERS':'SIMULATION RUNNING',paused:'PAUSED',completed:'RUN COMPLETED'}[status];
  return <main className="lab-shell">
 <header className="topbar">
-<a className="brand" href="https://daslab.co.kr" aria-label="DAS Lab home">DAS<span>LAB</span>
+<a className="brand" href="https://daslab.co.kr" aria-label="DAS Lab home">
+<img className="brand-logo" src={`${import.meta.env.BASE_URL}daslab_logo_dark_simple.png`} alt="DAS Lab"/>
 <span className="brand-divider"/>
-<small>WORK / SIMULATION</small>
+<span className="brand-context"><small>INTERACTIVE DEMO</small><b>FULFILLMENT / DIGITAL TWIN</b></span>
 </a>
-<a href="https://daslab.co.kr">Back to DAS Lab <ArrowUpRight size={15}/>
+<a className="back-link" href="https://daslab.co.kr"><span>Back to DAS Lab</span> <ArrowUpRight size={15}/>
 </a>
 </header>
  <section className="project-heading">
@@ -276,8 +277,8 @@ export default function Home(){
 </Tabs>
 </section>
  <footer className="footer">
-<div>
-<strong>DAS LAB</strong>
+<div className="footer-brand">
+<img src={`${import.meta.env.BASE_URL}daslab_logo_dark_simple.png`} alt="DAS Lab"/>
 <span>Digital Twin · Simulation · AI</span>
 </div>
 <span>Turning operational complexity into better decisions.</span>
@@ -286,4 +287,3 @@ export default function Home(){
 </footer>
 </main>
 }
-
