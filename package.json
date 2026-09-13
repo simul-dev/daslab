@@ -1,0 +1,22 @@
+{
+  "name": "daslab-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "pnpm run dev:home",
+    "dev:home": "vite --host 127.0.0.1 --port 4173 --strictPort",
+    "dev:demo": "pnpm --dir demos/logistics-fulfillment run dev",
+    "build:demo": "pnpm --dir demos/logistics-fulfillment run build",
+    "build:site": "node scripts/assemble-site.mjs",
+    "build": "pnpm run build:demo && pnpm run build:site",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
+  },
+  "devDependencies": {
+    "vite": "8.0.13"
+  },
+  "packageManager": "pnpm@11.25.0"
+}
