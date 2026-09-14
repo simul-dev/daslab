@@ -1,0 +1,29 @@
+.pump-scene { position:relative; isolation:isolate; background:#afc4c7; }
+.pump-scene-viewport { width:100%; height:100%; }
+.pump-scene-viewport canvas { width:100%; height:100%; display:block; touch-action:none; }
+.pump-scene-tag,.pump-scene-help,.pump-status-key,.pump-product-key {
+ position:absolute; display:flex; align-items:center; gap:10px; padding:8px 11px;
+ background:#102731e8; color:#cfdee2; font:10px var(--font-mono,monospace); pointer-events:none;
+ border:1px solid #1ba7c644; letter-spacing:.03em;
+}
+.pump-scene-tag { top:15px; left:15px; font-weight:700; }
+.pump-scene-tag > i { width:5px; height:5px; background:#2ed0e6; border-radius:50%; box-shadow:0 0 7px #2ed0e6; }
+.pump-scene-tag span { color:#a8bec5; }
+.pump-product-key { top:55px; left:15px; font-size:9px; gap:15px; }
+.pump-product-key span,.pump-status-key span { display:flex; gap:5px; align-items:center; }
+.pump-product-key i,.pump-status-key i { display:inline-block; width:8px; height:8px; border-radius:1px; }
+.pump-product-key .standard { background:#1794a6; }.pump-product-key .high-flow { background:#9b87c2; }
+.pump-scene-actions { position:absolute; right:15px; top:15px; display:flex; gap:6px; }
+.pump-scene-actions button { width:34px; height:34px; display:grid; place-content:center; background:#102731ed; border:1px solid #159ab580; color:#2cd1e6; cursor:pointer; }
+.pump-scene-actions button:hover { background:#216478; color:white; }.pump-scene-actions button:focus-visible{outline:2px solid #2ed0e6;outline-offset:2px}
+.pump-scene-help { bottom:12px; left:12px; font-size:9px; }
+.pump-status-key { bottom:12px; right:12px; gap:9px; font-size:9px; flex-wrap:wrap; max-width:70%; }
+.pump-scene-fallback { position:absolute; inset:20%; z-index:5; display:grid; place-content:center; color:#153541; background:#e1ecebf0; text-align:center; padding:20px; }
+.pump-scene:fullscreen { width:100vw; height:100vh; }
+@media(max-width:1200px){.pump-scene-help{display:none}.pump-status-key{max-width:calc(100% - 24px)}}
+@media(max-width:580px){
+ .pump-scene-tag{top:10px;left:10px;font-size:8px;gap:6px;padding:7px}.pump-scene-tag span{display:none}
+ .pump-product-key{top:43px;left:10px;padding:6px;font-size:8px;gap:9px}
+ .pump-scene-actions{right:10px;top:10px}.pump-scene-actions button{width:29px;height:29px}
+ .pump-status-key{left:10px;right:10px;bottom:10px;font-size:8px;gap:7px;padding:7px;max-width:none}
+}

@@ -1,23 +1,33 @@
 import { access, copyFile, cp, mkdir, readFile, rm } from "node:fs/promises";
 import { constants } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { demos } from "./demo-manifest.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = dirname(scriptDirectory);
 const outputRoot = join(projectRoot, "dist");
-const demoSource = join(
-  projectRoot,
-  "demos",
-  "logistics-fulfillment",
-  "dist",
-);
-const demoOutput = join(
-  outputRoot,
-  "demo",
-  "logistics",
-  "fulfillment",
-);
+const seenBases = new Set();
+const seenSources = new Set();
+const buildOutputs = demos.map((demo) => {
+  if (!/^demos\/[a-z0-9-]+$/.test(demo.source) ||
+      !/^\/demo\/(?:[a-z0-9-]+\/)+$/.test(demo.base)) {
+    throw new Error(`Invalid demo source or public path: ${demo.id}`);
+  }
+  if (seenBases.has(demo.base) || seenSources.has(demo.source) ||
+      [...seenBases].some(base => base.startsWith(demo.base) || demo.base.startsWith(base))) {
+    throw new Error(`Duplicate or overlapping demo paths: ${demo.id}`);
+  }
+  seenBases.add(demo.base);
+  seenSources.add(demo.source);
+  const source = resolve(projectRoot, demo.source, "dist");
+  const output = resolve(outputRoot, demo.base.slice(1));
+  if (!source.startsWith(resolve(projectRoot, "demos") + sep) ||
+      !output.startsWith(resolve(outputRoot, "demo") + sep)) {
+    throw new Error(`Demo path escapes the build directories: ${demo.id}`);
+  }
+  return { ...demo, source, output };
+});
 
 const homepageFiles = [
   "index.html",
@@ -41,9 +51,22 @@ for (const file of homepageFiles) {
   await requirePath(join(projectRoot, file), `Homepage file ${file}`);
 }
 await requirePath(join(projectRoot, "static"), "Homepage static directory");
-await requirePath(demoSource, "Demo build output (run pnpm run build:demo first)");
-await requirePath(join(demoSource, "index.html"), "Demo build index.html");
+// Validate every build before replacing the previous assembled output.
+for (const demo of buildOutputs) {
+  const indexPath = join(demo.source, "index.html");
+  await requirePath(indexPath, `Demo ${demo.id} build (run pnpm build:demos first)`);
+  const html = await readFile(indexPath, "utf8");
+  if (!html.includes(demo.base)) {
+    throw new Error(`Demo ${demo.id} must reference base ${demo.base}`);
+  }
+  if (/(?:src|href)=["']\/(?:assets\/|favicon\.svg(?:["'?#]))/i.test(html)) {
+    throw new Error(`Demo ${demo.id} references an asset outside its public base`);
+  }
+}
 
+if (resolve(outputRoot) !== resolve(projectRoot, "dist")) {
+  throw new Error("Unexpected site output directory");
+}
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
 
@@ -56,27 +79,10 @@ await cp(join(projectRoot, "static"), join(outputRoot, "static"), {
   dereference: true,
 });
 
-await mkdir(demoOutput, { recursive: true });
-await cp(demoSource, demoOutput, {
-  recursive: true,
-  dereference: true,
-});
-
-const demoIndexPath = join(demoOutput, "index.html");
-const demoIndex = await readFile(demoIndexPath, "utf8");
-const publicBase = "/demo/logistics/fulfillment/";
-
-if (!demoIndex.includes(publicBase)) {
-  throw new Error(
-    `The assembled demo index does not reference the required base path ${publicBase}`,
-  );
-}
-
-if (/(?:src|href)=[\"']\/(?:assets\/|favicon\.svg(?:[\"'?#]))/i.test(demoIndex)) {
-  throw new Error(
-    "The assembled demo index contains a root-relative asset URL outside the required demo base path.",
-  );
+for (const demo of buildOutputs) {
+  await mkdir(demo.output, { recursive: true });
+  await cp(demo.source, demo.output, { recursive: true, dereference: true });
+  console.log(`Demo ${demo.id}: ${demo.base}`);
 }
 
 console.log(`Assembled static site: ${outputRoot}`);
-console.log(`Demo URL path: ${publicBase}`);

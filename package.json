@@ -10,9 +10,15 @@
     "dev": "pnpm run dev:home",
     "dev:home": "vite --host 127.0.0.1 --port 4173 --strictPort",
     "dev:demo": "pnpm --dir demos/logistics-fulfillment run dev",
+    "dev:pump": "pnpm --dir demos/manufacturing-pump-assembly run dev",
+    "test:pump": "pnpm --dir demos/manufacturing-pump-assembly run test",
     "build:demo": "pnpm --dir demos/logistics-fulfillment run build",
+    "build:demos": "pnpm -r --workspace-concurrency=1 --filter \"./demos/*\" run build",
+    "test:demos": "pnpm -r --workspace-concurrency=1 --filter \"./demos/*\" run test",
+    "check": "pnpm run test:demos && pnpm run build && pnpm run verify:build",
+    "verify:build": "node scripts/verify-static-build.mjs",
     "build:site": "node scripts/assemble-site.mjs",
-    "build": "pnpm run build:demo && pnpm run build:site",
+    "build": "pnpm run build:demos && pnpm run build:site",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
   },
   "devDependencies": {

@@ -84,7 +84,7 @@
 			</div>
 			<div class="demo-hero-stats" aria-label="Demo catalogue summary">
 				<div><strong>09</strong><span lang="ko">산업 분야</span><span lang="en">Industries</span></div>
-				<div><strong>01</strong><span lang="ko">실행 모델</span><span lang="en">Live model</span></div>
+				<div><strong>02</strong><span lang="ko">실행 모델</span><span lang="en">Live models</span></div>
 				<div><strong>100%</strong><span lang="ko">브라우저 기반</span><span lang="en">Browser based</span></div>
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 				<p class="section-desc" lang="ko">분야를 선택하면 해당 모델의 목적, 공정 범위와 주요 분석 지표를 확인할 수 있습니다.</p>
 				<p class="section-desc" lang="en">Choose an industry to review each model’s purpose, process scope, and core analysis metrics.</p>
 				<div class="demo-directory-grid">
-					<a href="#manufacturing"><span class="directory-number">01</span><strong lang="ko">생산라인</strong><strong lang="en">Manufacturing</strong><small>PLANNED</small></a>
+					<a href="#manufacturing" class="is-live"><span class="directory-number">01</span><strong lang="ko">생산라인</strong><strong lang="en">Manufacturing</strong><small>LIVE</small></a>
 					<a href="#fulfillment" class="is-live"><span class="directory-number">02</span><strong lang="ko">풀필먼트</strong><strong lang="en">Fulfillment</strong><small>LIVE</small></a>
 					<a href="#ports"><span class="directory-number">03</span><strong lang="ko">항만</strong><strong lang="en">Ports &amp; Terminals</strong><small>PLANNED</small></a>
 					<a href="#civil-construction"><span class="directory-number">04</span><strong lang="ko">토목공사</strong><strong lang="en">Civil Construction</strong><small>PLANNED</small></a>
@@ -112,12 +112,18 @@
 			</div>
 		</section>
 
-		<section id="manufacturing" class="demo-domain">
+		<section id="manufacturing" class="demo-domain demo-domain-live">
 			<div class="section-inner">
-				<div class="demo-domain-heading"><div><p class="section-label">// Manufacturing demo</p><h2 class="section-title" lang="ko">생산라인 운영 최적화</h2><h2 class="section-title" lang="en">Production Line Operations</h2></div><span class="demo-status is-planned">PLANNED MODEL</span></div>
+				<div class="demo-domain-heading"><div><p class="section-label">// Manufacturing demo</p><h2 class="section-title" lang="ko">산업용 펌프 조립·시험 생산라인</h2><h2 class="section-title" lang="en">Industrial Pump Assembly &amp; Test Line Simulation</h2></div><span class="demo-status is-live">LIVE MODEL</span></div>
 				<article class="demo-model-panel">
-					<div class="demo-model-copy"><p class="demo-model-label">MODEL DESCRIPTION</p><p lang="ko">설비, 작업자, 버퍼, 품질 검사와 제품 흐름을 하나의 모델로 연결해 병목, 생산량, 재공품과 설비 가동률의 변화를 비교합니다.</p><p lang="en">Connect machines, operators, buffers, quality inspection, and product flow in one model to compare bottlenecks, throughput, WIP, and utilization.</p><ul class="demo-model-metrics"><li>Throughput</li><li>Work in process</li><li>Equipment utilization</li></ul><span class="demo-action demo-action-disabled" aria-disabled="true"><span lang="ko">모델 준비 중</span><span lang="en">Model planned</span></span></div>
-					<div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Material</li><li><b>02</b>Process</li><li><b>03</b>Buffer</li><li><b>04</b>Inspection</li><li><b>05</b>Finished goods</li></ol></div>
+					<div class="demo-model-copy">
+						<p class="demo-model-label">MODEL DESCRIPTION</p><p class="demo-card-kicker">Discrete Event Simulation / Digital Twin</p>
+						<p lang="ko">Standard와 High-Flow 펌프의 CNC 가공, 조립, 압력시험과 재작업을 3D 이산사건 모델로 연결합니다. 제품 믹스·설비 고장·버퍼 크기를 바꾸거나 시험기를 추가해, 병목과 교대 생산량이 어떻게 달라지는지 동일 Seed로 비교하세요.</p>
+						<p lang="en">Explore a 3D discrete-event model of Standard and High-Flow pump machining, assembly, pressure testing and rework. Change product mix, machine reliability or finite buffers, then compare a second test station against the baseline using the same seed.</p>
+						<ul class="demo-model-metrics"><li>Bottlenecks &amp; throughput</li><li>Finite buffers &amp; blocking</li><li>Changeover &amp; rework</li><li>KPI · Charts · Daily Summary</li></ul>
+						<a class="demo-action" href="/demo/manufacturing/pump-assembly/"><span lang="ko">펌프 생산라인 데모 실행</span><span lang="en">Open interactive pump demo</span><span aria-hidden="true">↗</span></a>
+					</div>
+					<div class="demo-process-map" aria-hidden="true"><p>// Process scope</p><ol><li><b>01</b>Material release</li><li><b>02</b>CNC / Kitting</li><li><b>03</b>Assembly</li><li><b>04</b>Pressure test / Repair</li><li><b>05</b>Inspection / Packaging</li><li><b>06</b>Finished goods</li></ol></div>
 				</article>
 			</div>
 		</section>
